@@ -1,115 +1,361 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Elian Yagouni</title>
   <style>
-    @font-face {
-      font-family: "SF Pro";
-      src: url("SF-Pro.woff2") format("woff2"); 
-    }
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap');
 
     body {
+      font-family: 'KlarheitGrotesk', 'Inter', sans-serif;
       margin: 0;
-      height: 25vh;
-      display: flex;
-      justify-content: right;
-      align-items: right;
-      background: #fff;
-      font-family: "SF Pro", sans-serif;
-    }
-
-    .menu, .work-choice, .work-gallery {
-      display: none;
-      flex-direction: column;
-      gap: 20px;
-      text-align: right;
-      align-items: right;
-    }
-
-    .active {
-      display: flex;
-    }
-
-    a, button {
-      text-decoration: none;
-      font-size: 1.5rem;
+      padding: 0;
+      background-color: #fff;
       color: #000;
+      line-height: 1.6;
+    }
+
+    .container {
+      display: flex;
+      padding: 40px 60px;
+      gap: 60px;
+    }
+
+    .sidebar {
+      width: 280px;
+    }
+
+    .menu-item {
+      font-size: 18px;
+      margin-bottom: 12px;
       cursor: pointer;
-      background: none;
-      border: none;
-      transition: color 0.3s;
+      transition: color 0.2s ease;
     }
 
-    a:hover, button:hover {
-      color: #04ff79;
+    .menu-item:hover {
+      color: #3b3b3b;
     }
 
-    .work-gallery img {
-      width: 300px;
-      height: auto;
+    .submenu {
+      margin-left: 20px;
+      margin-top: 10px;
+      display: none;
+    }
+
+    .submenu.active {
+      display: block;
+    }
+
+    .submenu-item {
+      font-size: 16px;
+      margin-bottom: 8px;
+      cursor: pointer;
+      transition: color 0.2s ease;
+    }
+
+    .submenu-item:hover {
+      color: #3b3a3a;
+    }
+
+    .category-list {
+      margin-top: 15px;
+      display: none;
+    }
+
+    .category-title {
+      font-size: 16px;
+      margin-bottom: 8px;
+      cursor: pointer;
+      padding: 8px;
+      border-radius: 4px;
+      transition: background 0.2s ease;
+    }
+
+    .category-title:hover {
+      background: #f5f5f5;
+      color: #363636;
+    }
+
+    .project-list {
       margin-top: 20px;
-      border-radius: 8px;
+      display: none;
+    }
+
+    .project-title {
+      font-size: 16px;
+      margin-bottom: 8px;
+      cursor: pointer;
+      padding: 8px;
+      border-radius: 4px;
+      transition: background 0.2s ease;
+    }
+
+    .project-title:hover {
+      background: #f5f5f5;
+      color: #363636;
+    }
+
+    .content {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start; /* Start from top */
+      padding-top: 20px; /* Extra top space */
+    }
+
+    .image-container {
+      width: 100%;
+      max-width: 600px;
+      height: auto;
+      overflow: hidden;
+      position: relative;
+      margin-top: 20px;
+      min-height: 300px;
+    }
+
+    .hover-image {
+      width: 100%;
+      height: auto;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      position: absolute;
+      top: 0;
+      left: 0;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .hover-image.visible {
+      opacity: 1;
+    }
+
+    .about-content {
+      max-width: 600px;
+      font-size: 16px;
+      /* Add more breathing room */
+      padding: 30px 0; /* ↑ More top/bottom padding */
+    }
+
+    .section-title {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    /* Watermark */
+    .watermark {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: rgba(0, 0, 0, 0.3);
+      z-index: 100;
+      pointer-events: none; /* So it doesn't block clicks */
+    }
+
+    .watermark-logo {
+      width: 14px;
+      height: 14px;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 2px;
     }
   </style>
 </head>
 <body>
-  <!-- Main Menu -->
-  <div class="menu active" id="mainMenu">
-    <a href="#" id="aboutLink"><strong>About</strong></a>
 
-    <a href="#" id="workLink"><strong>Work</strong></a>
-    
+  <div class="container">
+    <div class="sidebar">
+      <div class="menu-item" id="work-menu">Work</div>
+      <div class="submenu" id="work-submenu">
+        <div class="submenu-item" data-group="personal">Personal Work</div>
+        <div class="submenu-item" data-group="others">Others</div>
+      </div>
+
+      <div class="menu-item" id="about-menu">About Me</div>
+    </div>
+
+    <div class="content">
+      <!-- IMAGE CONTAINER - ALL IMAGES -->
+      <div class="image-container">
+        <!-- Personal Work Images -->
+        <img src="https://i.imgur.com/7JYVZQD.jpg" class="hover-image" id="personal-AUTO2025-1" />
+        <img src="https://i.imgur.com/9mGpFqW.jpg" class="hover-image" id="personal-AUTO2025-2" />
+
+        <img src="https://i.imgur.com/3zLbRwX.jpg" class="hover-image" id="personal-CIARA2022-1" />
+        <img src="https://i.imgur.com/abc123.jpg" class="hover-image" id="personal-CIARA2022-2" />
+
+        <img src="https://i.imgur.com/def456.jpg" class="hover-image" id="personal-GINIVIDIVINCI2024-1" />
+        <img src="https://i.imgur.com/ghi789.jpg" class="hover-image" id="personal-GINIVIDIVINCI2024-2" />
+
+        <img src="https://i.imgur.com/jkl012.jpg" class="hover-image" id="personal-IREMEMBER2025-1" />
+        <img src="https://i.imgur.com/mno345.jpg" class="hover-image" id="personal-IREMEMBER2025-2" />
+
+        <img src="https://i.imgur.com/pqr678.jpg" class="hover-image" id="personal-LEILA2025-1" />
+        <img src="https://i.imgur.com/stu901.jpg" class="hover-image" id="personal-LEILA2025-2" />
+
+        <img src="https://i.imgur.com/vwx234.jpg" class="hover-image" id="personal-PORTOFALGIERS2024-1" />
+        <img src="https://i.imgur.com/yz5678.jpg" class="hover-image" id="personal-PORTOFALGIERS2024-2" />
+
+        <!-- Others Images -->
+        <img src="https://i.imgur.com/123abc.jpg" class="hover-image" id="others-APRILIA-1" />
+        <img src="https://i.imgur.com/456def.jpg" class="hover-image" id="others-APRILIA-2" />
+
+        <img src="https://i.imgur.com/789ghi.jpg" class="hover-image" id="others-ARCHIVE-1" />
+        <img src="https://i.imgur.com/012jkl.jpg" class="hover-image" id="others-ARCHIVE-2" />
+
+        <img src="https://i.imgur.com/345mno.jpg" class="hover-image" id="others-MUSICCOVER-1" />
+        <img src="https://i.imgur.com/678pqr.jpg" class="hover-image" id="others-MUSICCOVER-2" />
+
+        <img src="https://i.imgur.com/901stu.jpg" class="hover-image" id="others-STUDIOJOHNSON-1" />
+        <img src="https://i.imgur.com/234vwx.jpg" class="hover-image" id="others-STUDIOJOHNSON-2" />
+      </div>
+
+      <!-- CATEGORY LISTS -->
+      <div class="category-list" id="personal-categories">
+        <div class="category-title" data-category="AUTO2025">AUTO,PORTRAITS,2025</div>
+        <div class="category-title" data-category="CIARA2022">CIARA,2022</div>
+        <div class="category-title" data-category="GINIVIDIVINCI2024">GINI VIDI VINCI 2024</div>
+        <div class="category-title" data-category="IREMEMBER2025">I REMEMBER SOME THINGS,2025</div>
+        <div class="category-title" data-category="LEILA2025">LEILA,2025</div>
+        <div class="category-title" data-category="PORTOFALGIERS2024">PORT OF ALGIERS, 2024</div>
+      </div>
+
+      <div class="category-list" id="others-categories">
+        <div class="category-title" data-category="APRILIA">APRILIA</div>
+        <div class="category-title" data-category="ARCHIVE">ARCHIVE CIRCULATION INITIATIVE</div>
+        <div class="category-title" data-category="MUSICCOVER">MUSIC COVER ARTWORK</div>
+        <div class="category-title" data-category="STUDIOJOHNSON">STUDIO JOHNSON LINARES</div>
+      </div>
+
+      <!-- PROJECT LISTS -->
+      <div class="project-list" id="personal-AUTO2025-projects">
+        <div class="project-title" data-img="personal-AUTO2025-1">Still 1</div>
+        <div class="project-title" data-img="personal-AUTO2025-2">Still 2</div>
+      </div>
+      <div class="project-list" id="personal-CIARA2022-projects">
+        <div class="project-title" data-img="personal-CIARA2022-1">Portrait A</div>
+        <div class="project-title" data-img="personal-CIARA2022-2">Portrait B</div>
+      </div>
+      <div class="project-list" id="personal-GINIVIDIVINCI2024-projects">
+        <div class="project-title" data-img="personal-GINIVIDIVINCI2024-1">Scene 1</div>
+        <div class="project-title" data-img="personal-GINIVIDIVINCI2024-2">Scene 2</div>
+      </div>
+      <div class="project-list" id="personal-IREMEMBER2025-projects">
+        <div class="project-title" data-img="personal-IREMEMBER2025-1">Memory Fragment 1</div>
+        <div class="project-title" data-img="personal-IREMEMBER2025-2">Memory Fragment 2</div>
+      </div>
+      <div class="project-list" id="personal-LEILA2025-projects">
+        <div class="project-title" data-img="personal-LEILA2025-1">Close-up</div>
+        <div class="project-title" data-img="personal-LEILA2025-2">Full Frame</div>
+      </div>
+      <div class="project-list" id="personal-PORTOFALGIERS2024-projects">
+        <div class="project-title" data-img="personal-PORTOFALGIERS2024-1">Harbor View</div>
+        <div class="project-title" data-img="personal-PORTOFALGIERS2024-2">Street Detail</div>
+      </div>
+      <div class="project-list" id="others-APRILIA-projects">
+        <div class="project-title" data-img="others-APRILIA-1">Campaign Image</div>
+        <div class="project-title" data-img="others-APRILIA-2">Detail Shot</div>
+      </div>
+      <div class="project-list" id="others-ARCHIVE-projects">
+        <div class="project-title" data-img="others-ARCHIVE-1">Exhibition View</div>
+        <div class="project-title" data-img="others-ARCHIVE-2">Publication Spread</div>
+      </div>
+      <div class="project-list" id="others-MUSICCOVER-projects">
+        <div class="project-title" data-img="others-MUSICCOVER-1">Album Cover</div>
+        <div class="project-title" data-img="others-MUSICCOVER-2">Back Cover</div>
+      </div>
+      <div class="project-list" id="others-STUDIOJOHNSON-projects">
+        <div class="project-title" data-img="others-STUDIOJOHNSON-1">Branding Mockup</div>
+        <div class="project-title" data-img="others-STUDIOJOHNSON-2">Website Preview</div>
+      </div>
+
+      <!-- About Section - now with more vertical space -->
+      <div class="about-content" id="about-section" style="display: none;">
+        <h2 class="section-title"><strong>ABOUT</strong></h2>
+        <p>Algerian Photographer, Director, Artist, and Designer based in France. Graduated from Orléans School of Art and Design, currently preparing a DNSEP.</p>
+        <p>His work explores themes of memory, time, and the archaeology of media, questioning the way images shape both personal and collective narratives. Through photography, film, and visual design, he creates sensitive dialogues between past and present, blending intimate stories with broader social reflections.</p>
+        <p>Drawing inspiration from cinema, music, and archival materials, his multidisciplinary practice spans directing, artistic direction, photography and design. His projects aim to craft images that embody emotion, authenticity, and meaning.</p>
+        <h2>CONTACT</h2>
+        <a href="mailto:contactelianyagouni@gmail.com">contactelianyagouni@gmail.com</a>
+        <p>Instagram <a href="https://instagram.com/septsixdeux" target="_blank">@septsixdeux</a></p>
+      </div>
+    </div>
   </div>
 
-  <!-- Work Choice -->
-  <div class="work-choice" id="workChoice">
-    <button id="personalBtn">Personal Work</button>
-    <button id="othersBtn">Others</button>
-    <button onclick="backToChoice()">← Back</button>
-  </div>
-
-  <!-- Work Gallery -->
-  <div class="work-gallery" id="workGallery">
-    <h2 id="galleryTitle"></h2>
-    <div id="galleryContent"></div>
-    <button onclick="backToChoice()">← Back</button>
+  <!-- Watermark -->
+  <div class="watermark">
+    <img src="https://ik.imagekit.io/hswtnwf8i/t-2(1).png?updatedAt=1759163699363" class="watermark-logo" />
+    from <a href="https://instagram.com/tarmacq_studios">tarmacq Studios</a>
   </div>
 
   <script>
-    const mainMenu = document.getElementById("mainMenu");
-    const workChoice = document.getElementById("workChoice");
-    const workGallery = document.getElementById("workGallery");
-    const galleryTitle = document.getElementById("galleryTitle");
-    const galleryContent = document.getElementById("galleryContent");
-
-    document.getElementById("workLink").addEventListener("click", () => {
-      mainMenu.classList.remove("active");
-      workChoice.classList.add("active");
+    // Toggle main submenu
+    document.getElementById('work-menu').addEventListener('click', function() {
+      document.getElementById('work-submenu').classList.toggle('active');
+      document.getElementById('about-section').style.display = 'none';
+      hideAllLists();
+      hideAllImages();
     });
 
-    document.getElementById("personalBtn").addEventListener("click", () => {
-      showGallery("Personal Work", ["personal1.jpg", "personal2.jpg"]);
+    // About Me
+    document.getElementById('about-menu').addEventListener('click', function() {
+      document.getElementById('work-submenu').classList.remove('active');
+      hideAllLists();
+      hideAllImages();
+      document.getElementById('about-section').style.display = 'block';
     });
 
-    document.getElementById("othersBtn").addEventListener("click", () => {
-      showGallery("Others", ["other1.jpg", "other2.jpg"]);
+    // Show category list when group is selected
+    document.querySelectorAll('.submenu-item').forEach(item => {
+      item.addEventListener('click', function() {
+        const group = this.getAttribute('data-group');
+        hideAllLists();
+        hideAllImages();
+        document.getElementById(`${group}-categories`).style.display = 'block';
+      });
     });
 
-    function showGallery(title, images) {
-      workChoice.classList.remove("active");
-      workGallery.classList.add("active");
-      galleryTitle.textContent = title;
-      galleryContent.innerHTML = images
-        .map(img => `<img src="${img}" alt="${title}">`)
-        .join("");
+    // Show project list when category is selected
+    document.querySelectorAll('.category-title').forEach(cat => {
+      cat.addEventListener('click', function() {
+        const parentList = this.closest('.category-list');
+        const group = parentList.id.startsWith('personal') ? 'personal' : 'others';
+        const catKey = this.getAttribute('data-category');
+        hideAllLists();
+        hideAllImages();
+        document.getElementById(`${group}-${catKey}-projects`).style.display = 'block';
+      });
+    });
+
+    // Hover to show image
+    document.querySelectorAll('.project-title').forEach(title => {
+      title.addEventListener('mouseenter', function() {
+        const imgId = this.getAttribute('data-img');
+        hideAllImages();
+        const img = document.getElementById(imgId);
+        if (img) img.classList.add('visible');
+      });
+      title.addEventListener('mouseleave', function() {
+        hideAllImages();
+      });
+    });
+
+    function hideAllLists() {
+      document.querySelectorAll('.category-list, .project-list').forEach(el => {
+        el.style.display = 'none';
+      });
     }
 
-    function backToChoice() {
-      workGallery.classList.remove("active");
-      workChoice.classList.add("active");
+    function hideAllImages() {
+      document.querySelectorAll('.hover-image').forEach(img => {
+        img.classList.remove('visible');
+      });
     }
   </script>
+
 </body>
 </html>
