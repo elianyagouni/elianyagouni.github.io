@@ -1,0 +1,56 @@
+# Ignore compiled output files
+*.log
+*.tmp
+*.bak
+*.swp
+*.swo
+
+# Ignore operating system generated files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+.Spotlight-V100
+.Trashes
+
+# Ignore node_modules directory for Node.js projects
+node_modules/
+
+# Ignore build artifacts and temporary files for various languages/frameworks
+build/
+dist/
+target/
+.gradle/
+.idea/
+.vscode/
+
+# Ignore sensitive information
+.env
+config.local.js
+secrets.json
+
+# Ignore editor/IDE specific files
+*.sublime-project
+*.sublime-workspace
+*.idea
+*.vscode
+
+# Ignore Python specific files
+__pycache__/
+*.pyc
+*.pyd
+.Python
+venv/
+
+# Ignore Ruby specific files
+.bundle/
+vendor/bundle/
+.rvmrc
+.rbenv-version
+
+# Ignore Java specific files
+*.class
+*.jar
+*.war
+
+# Ignore macOS specific files
+.DS_Store
