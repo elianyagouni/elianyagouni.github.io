@@ -191,51 +191,59 @@ images that embody emotion, authenticity, and meaning.</p>
   </div>
 
   <script>
-    // Toggle submenu
-    document.getElementById('work-menu').addEventListener('click', function() {
-      const submenu = document.getElementById('work-submenu');
-      submenu.classList.toggle('active');
-    });
+  // Toggle submenu AND hide about section when WORK is clicked
+  document.getElementById('work-menu').addEventListener('click', function() {
+    const submenu = document.getElementById('work-submenu');
+    submenu.classList.toggle('active');
+    
+    // Hide the about section whenever WORK is clicked
+    document.getElementById('about-section').style.display = 'none';
+    
+    // Also hide all project lists and show image container
+    document.querySelector('.image-container').style.display = 'block';
+    document.querySelectorAll('.project-list').forEach(list => list.style.display = 'none');
+    hideAllImages();
+  });
 
-    // Show/hide about section
-    document.getElementById('about-menu').addEventListener('click', function() {
-      document.querySelector('.image-container').style.display = 'block';
-      document.getElementById('about-section').style.display = 'block';
+  // Show/hide about section
+  document.getElementById('about-menu').addEventListener('click', function() {
+    document.querySelector('.image-container').style.display = 'block';
+    document.getElementById('about-section').style.display = 'block';
+    document.querySelectorAll('.project-list').forEach(list => list.style.display = 'none');
+    hideAllImages();
+  });
+
+  // Handle category selection (Personal Work / Others)
+  const submenuItems = document.querySelectorAll('.submenu-item');
+  submenuItems.forEach(item => {
+    item.addEventListener('click', function() {
+      const category = this.getAttribute('data-category');
+      document.getElementById('about-section').style.display = 'none';
       document.querySelectorAll('.project-list').forEach(list => list.style.display = 'none');
+      document.getElementById(`${category}-projects`).style.display = 'block';
       hideAllImages();
     });
+  });
 
-    // Handle category selection (Personal Work / Others)
-    const submenuItems = document.querySelectorAll('.submenu-item');
-    submenuItems.forEach(item => {
-      item.addEventListener('click', function() {
-        const category = this.getAttribute('data-category');
-        document.getElementById('about-section').style.display = 'none';
-        document.querySelectorAll('.project-list').forEach(list => list.style.display = 'none');
-        document.getElementById(`${category}-projects`).style.display = 'block';
-        hideAllImages();
-      });
+  // Handle hover image reveal on project titles
+  const projectTitles = document.querySelectorAll('.project-title');
+  projectTitles.forEach(title => {
+    title.addEventListener('mouseenter', function() {
+      const imgId = this.getAttribute('data-img');
+      hideAllImages();
+      document.getElementById(imgId).classList.add('visible');
     });
-
-    // Handle hover image reveal on project titles
-    const projectTitles = document.querySelectorAll('.project-title');
-    projectTitles.forEach(title => {
-      title.addEventListener('mouseenter', function() {
-        const imgId = this.getAttribute('data-img');
-        hideAllImages();
-        document.getElementById(imgId).classList.add('visible');
-      });
-      title.addEventListener('mouseleave', function() {
-        hideAllImages();
-      });
+    title.addEventListener('mouseleave', function() {
+      hideAllImages();
     });
+  });
 
-    function hideAllImages() {
-      document.querySelectorAll('.hover-image').forEach(img => {
-        img.classList.remove('visible');
-      });
-    }
-  </script>
+  function hideAllImages() {
+    document.querySelectorAll('.hover-image').forEach(img => {
+      img.classList.remove('visible');
+    });
+  }
+</script>
 
 </body>
 </html>
