@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Elian Yagouni</title>
+   <link rel="icon" href="https://ik.imagekit.io/hswtnwf8i/SITE.ico?updatedAt=1759501429434" type="image/png">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap');
+
+    body {
+      font-family: 'KlarheitGrotesk', 'Inter', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #fff;
+      color: #000;
+      line-height: -1;
+    }
+
+    .container {
+      display: flex;
+      padding: 30px 50px;
+      gap: 50px;
+      max-height: calc(100vh - 20px);
+      overflow: visible;
+    }
+
+    .sidebar {
+      width: 240px;
+      flex-shrink: 0;
+    }
+
+    .menu-item {
+      font-size: 17px;
+      margin-bottom: 10px;
+      cursor: pointer;
+      transition: color 0.2s ease;
+    }
+
+    .menu-item:hover {
+      color: #3b3b3b;
+    }
+
+    .submenu {
+      margin-left: 16px;
+      margin-top: 8px;
+      display: none;
+    }
+
+    .submenu.active {
+      display: block;
+    }
+
+    .submenu-item {
+      font-size: 15px;
+      margin-bottom: 6px;
+      cursor: pointer;
+      transition: color 0.2s ease;
+    }
+
+    .submenu-item:hover {
+      color: #3b3a3a;
+    }
+
+    .category-list,
+    .project-list {
+      margin-top: 12px;
+      display: none;
+    }
+
+    .category-title,
+    .project-title {
+      font-size: 15px;
+      margin-bottom: 6px;
+      cursor: pointer;
+      padding: 6px 8px;
+      border-radius: 4px;
+      transition: background 0.2s ease;
+    }
+
+    .category-title:hover,
+    .project-title:hover {
+      background: #f5f5f5;
+      color: #363636;
+    }
+
+    .content {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow: visible;
+    }
+
+    .work-content {
+      width: 100%;
+      max-width: 600px;
+      display: block;
+    }
+
+    /* ✅ FIXED: Stable image container to prevent jumping */
+    .image-container {
+      width: 100%;
+      max-width: 600px;
+      height: 65vh; /* Stable viewport-relative height */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      margin: 20px 0;
+      background: #fafafa;
+      overflow: hidden;
+    }
+
+    .hover-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      object-fit: contain;
+      object-position: center;
+    }
+
+    .hover-image.visible {
+      opacity: 1;
+    }
+
+    .about-content {
+      width: 100%;
+      max-width: 600px;
+      font-size: 16px;
+      padding: 20px 0;
+      display: none;
+    }
+
+    .section-title {
+      font-size: 22px;
+      margin: 16px 0 16px;
+    }
+
+    /* Watermark */
+    .watermark {
+      position: fixed;
+      bottom: 16px;
+      right: 16px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: rgba(0, 0, 0, 0.3);
+      z-index: 100;
+      pointer-events: none;
+    }
+
+    .watermark-logo {
+      width: 14px;
+      height: 14px;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 2px;
+    }
+
+    /* Responsive: smaller image area on mobile */
+    @media (max-width: 768px) {
+      .container {
+        padding: 20px;
+        flex-direction: column;
+      }
+      .sidebar {
+        width: 100%;
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;
+      }
+      .image-container {
+        height: 50vh;
+      }
+      .sidebar {
+  width: 240px;
+  flex-shrink: 0;
+  overflow-y: auto; /* 👈 allows scrolling */
+  max-height: 100vh;
+}
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="sidebar">
+      <div class="menu-item" id="work-menu">Work</div>
+      <div class="submenu" id="work-submenu">
+        <div class="submenu-item" data-group="personal">Personal Work</div>
+        <div class="submenu-item" data-group="others">Others</div>
+      </div>
+      <div class="menu-item" id="about-menu">About</div>
+    </div>
+
+    <div class="content">
+      <!-- WORK MODE -->
+      <div class="work-content" id="work-content">
+        <div class="image-container">
+          <!-- Images -->
+          <img src="https://ik.imagekit.io/hswtnwf8i/elements%20website/WORK/Personnal%20work/AUTO_PORTRAITS,2025/Screenshot%202025-09-14%20at%206.56.02%C3%94%C3%87_PM.png?updatedAt=1759163063440" class="hover-image" id="personal-AUTO2025-1" />
+          <img src="https://ik.imagekit.io/hswtnwf8i/elements%20website/WORK/Personnal%20work/AUTO_PORTRAITS,2025/Screenshot%202025-09-14%20at%206.56.10%C3%94%C3%87_PM.png?updatedAt=1759163043778" class="hover-image" id="personal-AUTO2025-2" />
+          <img src="https://ik.imagekit.io/hswtnwf8i/CIARA,2022/IMG_3978.jpg?updatedAt=1759501258441" class="hover-image" id="personal-CIARA2022-1" />
+          <img src="https://ik.imagekit.io/hswtnwf8i/elements%20website/WORK/Personnal%20work/GINI%20VIDI%20VICI,%202024/Screenshot%202025-09-14%20at%206.41.58%C3%94%C3%87_PM.png?updatedAt=1759163103936" class="hover-image" id="personal-GINIVIDIVINCI2024-1" />
+          <img src="https://ik.imagekit.io/hswtnwf8i/elements%20website/WORK/Personnal%20work/I%20REMEMBER%20SOME%20THINGS,%202025/FUX.png?updatedAt=1759163114235" class="hover-image" id="personal-IREMEMBER2025-1" />
+          <img src="https://ik.imagekit.io/hswtnwf8i/elements%20website/WORK/Personnal%20work/I%20REMEMBER%20SOME%20THINGS,%202025/7.jpg?updatedAt=1759163135239" class="hover-image" id="personal-IREMEMBER2025-2" />
+          <img src="https://ik.imagekit.io/hswtnwf8i/elements%20website/WORK/Personnal%20work/I%20REMEMBER%20SOME%20THINGS,%202025/1.jpg?updatedAt=1759163322468" class="hover-image" id="personal-IREMEMBER2025-3" />
+          <img src="https://ik.imagekit.io/hswtnwf8i/LEILA,2025/FINALE%20FINALE.png?updatedAt=1759501107035" class="hover-image" id="personal-LEILA2025-1" />
+          <img src="https://ik.imagekit.io/hswtnwf8i/elements%20website/WORK/Personnal%20work/PORT%20OF%20ALGIERS,%202024/vue%20ivoire%201.jpg?updatedAt=1759163234083" class="hover-image" id="personal-PORTOFALGIERS2024-1" />
+          <img src="https://ik.imagekit.io/hswtnwf8i/elements%20website/WORK/Personnal%20work/PORT%20OF%20ALGIERS,%202024/guerre%20ivoire%201.jpg?updatedAt=1759163187426" class="hover-image" id="personal-PORTOFALGIERS2024-2" />
+          <img src="https://ik.imagekit.io/hswtnwf8i/elements%20website/WORK/Personnal%20work/PORT%20OF%20ALGIERS,%202024/import%20ivoire%201.jpg?updatedAt=1759163099476" class="hover-image" id="personal-PORTOFALGIERS2024-3" />
+          <img src="https://ik.imagekit.io/hswtnwf8i/APRILIA/B1340279.jpg?updatedAt=1759344803203" class="hover-image" id="others-APRILIA-1" />
+          <img src="https://ik.imagekit.io/hswtnwf8i/APRILIA/B1340230.jpg?updatedAt=1759344798849" class="hover-image" id="others-APRILIA-2" />
+          <img src="https://ik.imagekit.io/hswtnwf8i/APRILIA/B1340004.jpg?updatedAt=1759344798527" class="hover-image" id="others-APRILIA-3" />
+          <img src="https://ik.imagekit.io/hswtnwf8i/APRILIA/B1340058_1.jpg?updatedAt=1759344796590" class="hover-image" id="others-APRILIA-4" />
+          <img src="https://ik.imagekit.io/hswtnwf8i/APRILIA/B1330978.jpg?updatedAt=1759344794508" class="hover-image" id="others-APRILIA-5" />
+          <img src="https://ik.imagekit.io/hswtnwf8i/APRILIA/B1340139.jpg?updatedAt=1759344794477" class="hover-image" id="others-APRILIA-6" />
+          <img src="https://ik.imagekit.io/hswtnwf8i/ARCHi.jpg?updatedAt=1760201449806" class="hover-image" id="others-ARCHIVE-1" />
+          <img src="https://ik.imagekit.io/hswtnwf8i/elements%20website/WORK/Others/MUSIC%20COVER%20ARTWORK/DINOS/FINAL%20DINOS%20cover%20sans%20parental%20advisory.jpg?updatedAt=1759163305539" class="hover-image" id="others-MUSICCOVER-1" />
+          <img src="/Others/MUSIC COVER ARTWORK/FINAL EP 2.png" class="hover-image" id="others-MUSICCOVER-2" />
+          <img src="/Others/MUSIC COVER ARTWORK/FINAL RUH.png" class="hover-image" id="others-MUSICCOVER-3" />
+          <img src="/Others/MUSIC COVER ARTWORK/FINAL COVER SKETCHERZ ZAHHAM.png" class="hover-image" id="others-MUSICCOVER-4" />
+          <img src="https://ik.imagekit.io/hswtnwf8i/elements%20website/WORK/Others/STUDIO%20JOHNSON%20LINARES/DSC_5639.jpg?updatedAt=1759163228753" class="hover-image" id="others-STUDIOJOHNSON-1" />
+        </div>
+
+        <!-- Category & Project Lists -->
+        <div class="category-list" id="personal-categories">
+          <div class="category-title" data-category="AUTO2025">AUTO,PORTRAITS,2025</div>
+          <div class="category-title" data-category="CIARA2022">CIARA,2022</div>
+          <div class="category-title" data-category="GINIVIDIVINCI2024">GINI VIDI VINCI 2024</div>
+          <div class="category-title" data-category="IREMEMBER2025">I REMEMBER SOME THINGS,2025</div>
+          <div class="category-title" data-category="LEILA2025">LEILA,2025</div>
+          <div class="category-title" data-category="PORTOFALGIERS2024">PORT OF ALGIERS, 2024</div>
+        </div>
+
+        <div class="category-list" id="others-categories">
+          <div class="category-title" data-category="APRILIA">APRILIA</div>
+          <div class="category-title" data-category="ARCHIVE">ARCHIVE CIRCULATION INITIATIVE</div>
+          <div class="category-title" data-category="MUSICCOVER">MUSIC COVER ARTWORK</div>
+          <div class="category-title" data-category="STUDIOJOHNSON">STUDIO JOHNSON LINARES</div>
+        </div>
+
+        <!-- Project Lists -->
+        <div class="project-list" id="personal-AUTO2025-projects">
+          <div class="project-title" data-img="personal-AUTO2025-1">Image 1</div>
+          <div class="project-title" data-img="personal-AUTO2025-2">Image 2</div>
+        </div>
+        <div class="project-list" id="personal-CIARA2022-projects">
+          <div class="project-title" data-img="personal-CIARA2022-1">Image 1</div>
+        </div>
+        <div class="project-list" id="personal-GINIVIDIVINCI2024-projects">
+          <div class="project-title" data-img="personal-GINIVIDIVINCI2024-1">Image 1</div>
+
+        </div>
+        <div class="project-list" id="personal-IREMEMBER2025-projects">
+          <div class="project-title" data-img="personal-IREMEMBER2025-1">Image 1</div>
+          <div class="project-title" data-img="personal-IREMEMBER2025-2">Image 2</div>
+          <div class="project-title" data-img="personal-IREMEMBER2025-3">Image 2</div>
+        </div>
+        <div class="project-list" id="personal-LEILA2025-projects">
+          <div class="project-title" data-img="personal-LEILA2025-1">Image 1</div>
+        </div>
+        <div class="project-list" id="personal-PORTOFALGIERS2024-projects">
+          <div class="project-title" data-img="personal-PORTOFALGIERS2024-1">Image 1</div>
+          <div class="project-title" data-img="personal-PORTOFALGIERS2024-2">Image 2</div>
+          <div class="project-title" data-img="personal-PORTOFALGIERS2024-3">Image 3</div>
+        </div>
+        <div class="project-list" id="others-APRILIA-projects">
+          <div class="project-title" data-img="others-APRILIA-1">Image 1</div>
+          <div class="project-title" data-img="others-APRILIA-2">Image 2</div>
+          <div class="project-title" data-img="others-APRILIA-3">Image 3</div>
+          <div class="project-title" data-img="others-APRILIA-4">Image 4</div>
+          <div class="project-title" data-img="others-APRILIA-5">Image 5</div>
+          <div class="project-title" data-img="others-APRILIA-6">Image 6</div>
+        </div>
+        <div class="project-list" id="others-ARCHIVE-projects">
+          <div class="project-title" data-img="others-ARCHIVE-1">Image 1</div>
+        </div>
+        <div class="project-list" id="others-MUSICCOVER-projects">
+          <div class="project-title" data-img="others-MUSICCOVER-1">Image 1</div>
+          <div class="project-title" data-img="others-MUSICCOVER-2">Image 2</div>
+          <div class="project-title" data-img="others-MUSICCOVER-3">Image 3</div>
+          <div class="project-title" data-img="others-MUSICCOVER-4">Image 4</div>
+        </div>
+        <div class="project-list" id="others-STUDIOJOHNSON-projects">
+          <div class="project-title" data-img="others-STUDIOJOHNSON-1">Image 1</div>
+        </div>
+      </div>
+
+      <!-- ABOUT SECTION -->
+      <div class="about-content" id="about-section">
+        <h2 class="section-title"><strong>ABOUT</strong></h2>
+        <p>Algerian Photographer, Director, Artist, and Designer based in France. Graduated from Orléans School of Art and Design, currently preparing a DNSEP.</p>
+        <p>His work explores themes of memory, time, and the archaeology of media, questioning the way images shape both personal and collective narratives. Through photography, film, and visual design, he creates sensitive dialogues between past and present, blending intimate stories with broader social reflections.</p>
+        <p>Drawing inspiration from cinema, music, and archival materials, his multidisciplinary practice spans directing, artistic direction, photography and design. His projects aim to craft images that embody emotion, authenticity, and meaning.</p>
+        <h2>CONTACT</h2>
+        <a href="mailto:contactelianyagouni@gmail.com">contactelianyagouni@gmail.com</a>
+        <p>Instagram <a href="https://instagram.com/septsixdeux" target="_blank">@septsixdeux</a></p>
+      </div>
+    </div>
+  </div>
+
+
+  <script>
+    function hideAllLists() {
+      document.querySelectorAll('.category-list, .project-list').forEach(el => {
+        el.style.display = 'none';
+      });
+    }
+
+    function hideAllImages() {
+      document.querySelectorAll('.hover-image').forEach(img => {
+        img.classList.remove('visible');
+      });
+    }
+
+    function showWork() {
+      document.getElementById('work-content').style.display = 'block';
+      document.getElementById('about-section').style.display = 'none';
+    }
+
+    function showAbout() {
+      document.getElementById('work-content').style.display = 'none';
+      document.getElementById('about-section').style.display = 'block';
+    }
+
+    // Work Menu
+    document.getElementById('work-menu').addEventListener('click', function() {
+      document.getElementById('work-submenu').classList.toggle('active');
+      showWork();
+      hideAllLists();
+      hideAllImages();
+    });
+
+    // About Menu
+    document.getElementById('about-menu').addEventListener('click', function() {
+      document.getElementById('work-submenu').classList.remove('active');
+      showAbout();
+    });
+
+    // Submenu Items
+    document.querySelectorAll('.submenu-item').forEach(item => {
+      item.addEventListener('click', function() {
+        showWork();
+        const group = this.getAttribute('data-group');
+        hideAllLists();
+        hideAllImages();
+        document.getElementById(`${group}-categories`).style.display = 'block';
+      });
+    });
+
+    // Category Titles
+    document.querySelectorAll('.category-title').forEach(cat => {
+      cat.addEventListener('click', function() {
+        showWork();
+        const parentList = this.closest('.category-list');
+        const group = parentList.id.startsWith('personal') ? 'personal' : 'others';
+        const catKey = this.getAttribute('data-category');
+        hideAllLists();
+        hideAllImages();
+        document.getElementById(`${group}-${catKey}-projects`).style.display = 'block';
+      });
+    });
+
+    // Project Hover
+    document.querySelectorAll('.project-title').forEach(title => {
+      title.addEventListener('mouseenter', function() {
+        const imgId = this.getAttribute('data-img');
+        hideAllImages();
+        const img = document.getElementById(imgId);
+        if (img) img.classList.add('visible');
+      });
+      title.addEventListener('mouseleave', function() {
+        hideAllImages();
+      });
+    });
+  </script>
+</body>
+</html>
